@@ -13,8 +13,9 @@ main/.env
 .env
 .env.prod
 
-# Данные (не версионируются, но папки сохраняем)
 main/media/*
+!main/media/categories/
+main/media/categories/*
 !main/media/categories/.gitkeep
 
 # Собранная статика
