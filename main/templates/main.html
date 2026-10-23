@@ -10,6 +10,29 @@
             content=
                 Магазин вкусных тортов в Туле. Доставка по городу.
         >
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Cake71 — Торты на заказ в Туле">
+        <meta property="og:description" content="Магазин вкусных тортов в Туле. Доставка по городу.">
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/main2.webp' %}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
+        <meta property="og:site_name" content="Cake71">
+        <meta property="og:locale" content="ru_RU">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Cake71 — Торты на заказ в Туле">
+        <meta name="twitter:description" content="Магазин вкусных тортов в Туле. Доставка по городу.">
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/main2.webp' %}">
+
+        <!-- Canonical -->
+        <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/webp" href="{% static 'images/favicon.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+
         <link rel="stylesheet" href="{% static 'bs/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'main.css' %}">
         <link rel="stylesheet" href="{% static 'header.css' %}">
