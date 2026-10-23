@@ -18,10 +18,12 @@ ALLOWED_HOSTS = [
     'main',
     'gateway',
     'cake71.ru',
+    'www.cake71.ru',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://cake71.ru',
+    'https://www.cake71.ru',
 ]
 
 
