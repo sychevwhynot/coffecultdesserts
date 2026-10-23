@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="container header-container pt-3 pb-3">
+    <a href="{% url 'home' %}" class="logo heading-1">
+        Cake71
+    </a>
+
+    <!-- Бургер (только до lg) -->
+    <button type="button"
+            class="burger"
+            id="burger"
+            aria-label="Открыть меню"
+            aria-expanded="false"
+            aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Обычная навигация: остаётся ровно как была, только добавлен класс-модификатор -->
+    <nav class="header-nav header-nav--desktop">
+        <a href="#hero" class="link-brand">О нас</a>
+        <a href="#second" class="link-brand">Заказать торт</a>
+        <a href="#three" class="link-brand">Категории</a>
+        <a href="#footer" class="link-brand">Контакты</a>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <nav class="mobile-nav" id="mobile-nav" hidden>
+        <a href="#hero">О нас</a>
+        <a href="#second">Заказать торт</a>
+        <a href="#three">Категории</a>
+        <a href="#footer">Контакты</a>
+    </nav>
+</div>

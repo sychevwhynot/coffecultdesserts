@@ -1,0 +1,135 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mb-3 mt-3">
+    <section id="hero" class="pt-3 pb-3">
+        <div class="row">
+            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center gap-4">
+                <span class="fw-bold">О нас</span>
+                <h1>Создаем торты, которые хочется запомнить.</h1>
+                <p>Мы — небольшая кондитерская, где каждый торт создаётся вручную. Нам важно, чтобы он не только красиво выглядел, но и радовал своим вкусом.</p>
+                <p>Помогаем воплощать ваши идеи: от выбора начинки до индивидуального оформления.</p>
+
+                <div class="row text-center g-3">
+                    <div class="col-12 col-lg-4 stats">
+                        <h5 class="fw-bold">7+<br>лет на рынке</h5>
+                    </div>
+                    <div class="col-12 col-lg-4 stats">
+                        <h5 class="fw-bold">1200+<br>тортов</h5>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <h5 class="fw-bold">40+<br>начинок</h5>
+                    </div>
+                </div>
+
+                <a href="#second" class="button">Заказать торт</a>
+            </div>
+            <div class="d-none d-lg-flex col-lg-6 align-items-center">
+                <img src="{% static '/images/main2.webp' %}" width="100%" height="auto" class="rounded-3 img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <section id="second" class="pt-3 pb-3">
+        <div class="row">
+            <div class="d-none d-lg-flex col-lg-6 align-items-center">
+                <img src="{% static '/images/main3.webp' %}" width="100%" height="auto" class="rounded-3 img-fluid">
+            </div>
+            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center gap-4">
+                <span class="fw-bold">Заказать торт</span>
+                <h1>Заполните форму и мы с вами свяжемся.</h1>
+                <p>Поможем определиться с начинкой, оформлением и ответим на ваши вопросы.</p>
+                <form id="order-form" method="post" action="{% url 'order_submit' %}" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.name }}
+                        <div class="invalid-feedback" data-error="name"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.email }}
+                        <div class="invalid-feedback" data-error="email"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.phone }}
+                        <div class="invalid-feedback" data-error="phone"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.comment }}
+                        <div class="invalid-feedback" data-error="comment"></div>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        {{ form.consent_personal }}
+                        <label class="form-check-label" for="{{ form.consent_personal.id_for_label }}">
+                            Я согласен на обработку
+                            <a href="{% url 'personal' %}" target="_blank" rel="noopener">персональных данных</a>
+                        </label>
+                        <div class="invalid-feedback d-block" data-error="consent_personal"></div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        {{ form.consent_policy }}
+                        <label class="form-check-label" for="{{ form.consent_policy.id_for_label }}">
+                            Я ознакомлен и согласен с
+                            <a href="{% url 'policy' %}" target="_blank" rel="noopener">политикой обработки персональных данных</a>
+                        </label>
+                        <div class="invalid-feedback d-block" data-error="consent_policy"></div>
+                    </div>
+
+                    <button type="submit" class="button w-100" id="order-submit">Отправить заявку</button>
+
+                    <div class="form-message mt-3" id="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="three" class="pt-3 pb-3 mt-3">
+        <div class="d-flex flex-column gap-3 mb-4">
+            <span class="fw-bold">Категории</span>
+            <h1>Выберите свой формат</h1>
+        </div>
+
+        <div class="row g-4" id="categories-grid">
+            {% for category in categories %}
+                <div class="col-12 col-lg-4 {% if forloop.counter > 3 %}extra-category is-hidden{% endif %}">
+                    <a href="{% url 'category_detail' category.slug %}" class="category-card">
+                        {% with main=category.main_images.0 %}
+                            {% if main %}
+                                <img src="{{ main.image.url }}"
+                                    alt="{{ category.name }}"
+                                    class="category-card-img">
+                            {% else %}
+                                <div class="category-card-img category-card-placeholder">
+                                    <span>Нет фото</span>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+
+                        <div class="category-card-overlay">
+                            <h3>{{ category.name }}</h3>
+                            {% if category.description %}
+                                <p>{{ category.description }}</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p>Пока нет категорий</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if categories|length > 3 %}
+            <div class="text-center mt-4">
+                <button type="button" class="button" id="show-more-btn">Показать все</button>
+            </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

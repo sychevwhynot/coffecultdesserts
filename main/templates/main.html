@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cake71 - Торты на заказ</title>
+        <meta
+            name="description"
+            content=
+                Магазин вкусных тортов в Туле. Доставка по городу.
+        >
+        <link rel="stylesheet" href="{% static 'bs/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'footer.css' %}">
+        <script src="{% static 'card.js' %}" defer></script>
+        <script src="{% static 'banner.js' %}" defer></script>
+        <script src="{% static 'form_ajax.js' %}" defer></script>
+        <script src="{% static 'burger.js' %}" defer></script>
+        {% block extra_css %}{% endblock %}
+    </head>
+
+    <body>
+        <header>{% include 'header.html' %}</header>
+
+        <main>{% block content %}{% endblock %}</main>
+
+        <footer>{% include 'footer.html' %}</footer>
+
+        <div id="cookie-banner" class="cookie-banner" hidden>
+            <div class="cookie-banner__text">
+                Мы используем файлы cookie, чтобы сайт работал лучше.
+                Продолжая пользоваться сайтом, вы <a href="{% url 'personal' %}">соглашаетесь</a> с
+                <a href="{% url 'policy' %}">политикой обработки персональных данных</a>.
+            </div>
+            <button type="button" class="button cookie-banner__btn" id="cookie-accept">
+                Принять
+            </button>
+        </div>
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>
