@@ -19,6 +19,8 @@ ALLOWED_HOSTS = [
     'gateway',
     'cake71.ru',
     'www.cake71.ru',
+    '77.91.74.86',
+    'nginx87901.hostkey.in',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
